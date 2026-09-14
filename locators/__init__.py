@@ -1,0 +1,4 @@
+from .questions_page_locators import QuestionsPageLocators
+from .base_page_locators import BasePageLocators
+from .order_button_locators import OrderButtonLocators
+from .logo_page_locators import LogoPageLocators
