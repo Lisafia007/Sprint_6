@@ -24,7 +24,6 @@ test-results/
 test-reports/
 *.xml
 *.html
-*.json
 *.db
 
 # PyCharm
