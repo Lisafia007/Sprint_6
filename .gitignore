@@ -20,8 +20,6 @@ dmypy.json
 .pyre/
 
 *.log
-allure-results/
-allure-report/
 test-results/
 test-reports/
 *.xml
