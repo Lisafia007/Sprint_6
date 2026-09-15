@@ -13,4 +13,4 @@ class OrderButtonScooter(BasePageScooter):
    #Метод нажатия на кнопку "Заказать"
    @allure.step("Нажимаем на кнопку 'Заказать'")
    def click_order_button(self, locator):
-      WebDriverWait(self.driver, 5).until(expected_conditions.element_to_be_clickable(locator)).click()
+      self.wait_element_to_be_clickable(locator).click()

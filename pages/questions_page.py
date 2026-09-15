@@ -10,19 +10,16 @@ from pages.base_page import BasePageScooter
 
 class QuestionsPageScooter(BasePageScooter):
 
-   def __init__(self, driver):
-        self.driver = driver
-
    #Метод для перехода к разделу с вопросами
    @allure.step("Перезодим к разделу с вопросами")
    def go_to_questions_section(self):
-      elements_questions_section = self.driver.find_element(*QuestionsPageLocators.QUESTIONS_SECTION)
-      self.driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", elements_questions_section)
+      elements_questions_section = self.element(QuestionsPageLocators.QUESTIONS_SECTION)
+      self.scroll_to_element(elements_questions_section)
 
    #Метод для ожидания появления раздела с вопросами
    @allure.step("Ожидаем появления раздела с вопросами")
    def wait_for_questions_sectiion(self):
-      WebDriverWait(self.driver, 10).until(expected_conditions.visibility_of_element_located(QuestionsPageLocators.QUESTIONS_SECTION))
+      self.wait_element_visibility(QuestionsPageLocators.QUESTIONS_SECTION)
 
    #Объединение методов в шаг для перехода к разделу с вопросами
    @allure.step("Объединям методы для перехода к разделу с вопросами в шаг")
@@ -33,14 +30,14 @@ class QuestionsPageScooter(BasePageScooter):
    #Метод нажатия на стрелку
    @allure.step("Нажимаем на стрелку у вопроса")
    def check_arrow(self, index):
-      arrow = WebDriverWait(self.driver, 10).until(expected_conditions.element_to_be_clickable(QuestionsPageLocators.ARROWS[index]))
-      self.driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", arrow)
-      self.driver.execute_script("arguments[0].click();", arrow) 
+      arrow = self.wait_element_to_be_clickable(QuestionsPageLocators.ARROWS[index])
+      self.scroll_to_element(arrow)
+      self.click_js(arrow) 
        
    #Метод ожидания отображения соответствующего текста
    @allure.step("Отображение соответствующего текста для вопроса")
    def check_text(self, index):
-      WebDriverWait(self.driver, 10).until(expected_conditions.visibility_of_element_located(QuestionsPageLocators.TEXTS[index]))
+      self.wait_element_visibility(QuestionsPageLocators.TEXTS[index])
 
    #Объединение методов в шаг для открытия текста соответсвующего вопросу
    @allure.step("Объединение методов в шаг для открытия текста соответсвующего вопросу")
