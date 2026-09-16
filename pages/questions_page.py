@@ -1,9 +1,4 @@
 import allure
-import pytest
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions
-from selenium.webdriver.support.wait import WebDriverWait
 from locators import QuestionsPageLocators
 from pages.base_page import BasePageScooter
 
@@ -11,21 +6,21 @@ from pages.base_page import BasePageScooter
 class QuestionsPageScooter(BasePageScooter):
 
    #Метод для перехода к разделу с вопросами
-   @allure.step("Перезодим к разделу с вопросами")
+   @allure.step("Переходим к разделу с вопросами")
    def go_to_questions_section(self):
       elements_questions_section = self.element(QuestionsPageLocators.QUESTIONS_SECTION)
       self.scroll_to_element(elements_questions_section)
 
    #Метод для ожидания появления раздела с вопросами
    @allure.step("Ожидаем появления раздела с вопросами")
-   def wait_for_questions_sectiion(self):
+   def wait_for_questions_section(self):
       self.wait_element_visibility(QuestionsPageLocators.QUESTIONS_SECTION)
 
    #Объединение методов в шаг для перехода к разделу с вопросами
    @allure.step("Объединям методы для перехода к разделу с вопросами в шаг")
    def section(self):
       self.go_to_questions_section()
-      self.wait_for_questions_sectiion()
+      self.wait_for_questions_section()
 
    #Метод нажатия на стрелку
    @allure.step("Нажимаем на стрелку у вопроса")

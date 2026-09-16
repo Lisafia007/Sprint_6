@@ -4,7 +4,7 @@ DATA_SET_1 ={
    "address_field": "Куйбышева 44",
    "metro_name": "Черкизовская",
    "phone_field": "79508873041",
-   "data_day": "11",
+   "date_day": "11",
    "rental_time": "трое суток",
    "color": "black"
 }
@@ -15,7 +15,7 @@ DATA_SET_2 ={
    "address_field": "Строителей 20",
    "metro_name": "Сокольники",
    "phone_field": "79598453009",
-   "data_day": "22",
+   "date_day": "22",
    "rental_time": "сутки",
    "color": "grey"
 }

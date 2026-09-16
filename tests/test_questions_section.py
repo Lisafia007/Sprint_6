@@ -1,11 +1,7 @@
 import allure
 import pytest
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions
-from selenium.webdriver.support.wait import WebDriverWait
 from locators import QuestionsPageLocators
-from pages import QuestionsPageScooter, BasePageScooter 
+from pages import QuestionsPageScooter 
 from data import URLS
 
 class TestQuesctionsSection:

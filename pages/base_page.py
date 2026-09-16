@@ -1,10 +1,8 @@
 import allure
-import pytest
-from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
-from locators import BasePageLocators, OrderButtonLocators
+from locators import BasePageLocators
 
 
 class BasePageScooter():
@@ -75,8 +73,9 @@ class BasePageScooter():
       self.element(BasePageLocators.NEXT_BUTTON).click()
 
    #Объединение методов для заполнения формы данных заказа в шаг
-   @allure.step("Объединям методы для заполнения формы данных заказа в шаг")
+   @allure.step("Объединяем методы для заполнения формы данных заказа в шаг")
    def filling_out_form(self, data):
+      self.wait_for_data_form()
       self.input_name(data)
       self.input_surname(data)
       self.input_address(data)
@@ -88,7 +87,7 @@ class BasePageScooter():
    @allure.step("Выбираем день аренды самоката")
    def choose_day(self, data):
       self.element(BasePageLocators.DATA_DAY_FIELD).click()
-      day = (data["data_day"])
+      day = (data["date_day"])
       select_day = (By.XPATH, f"//div[contains(@class, 'react-datepicker__day') and text()='{day}']")
       self.wait_element_to_be_clickable(select_day).click()
 
@@ -102,7 +101,6 @@ class BasePageScooter():
    #Метод выбора цвета самоката
    @allure.step("Выбираем цвета самоката")
    def choose_color(self, data):
-      self.element(BasePageLocators.CHOOSE_COLOR_SCOOTER).click()
       color_button = data['color']
       self.wait_element_to_be_clickable((By.ID, color_button)).click()
 
@@ -112,7 +110,7 @@ class BasePageScooter():
       self.element(BasePageLocators.ORDER_BUTTON).click()
 
    #Объединение методов для заполнения формы Про аренду в шаг
-   @allure.step("Объединям методы для заполнения формы Про аренду в шаг")
+   @allure.step("Объединяем методы для заполнения формы Про аренду в шаг")
    def filling_about_renting(self, data):
       self.choose_day(data)
       self.choose_rental_time(data)
@@ -156,10 +154,16 @@ class BasePageScooter():
    def get_current_url(self):
       return self.driver.current_url
 
+   #Метод для ожидания загрузки url 
+   @allure.step("Ожидаем загрузку url страницы")
+   def wait_url_contains(self, url_part, wait_time=10):
+      WebDriverWait(self.driver, wait_time).until(
+      expected_conditions.url_contains(url_part))
+
    #Метод перехода к новому окну 
    @allure.step("Переходим на новое открывшееся окно")
-   def switch_to_new_window(self, windows_before, timeout=10):
-      WebDriverWait(self.driver, timeout).until(
+   def switch_to_new_window(self, windows_before, wait_time=10):
+      WebDriverWait(self.driver, wait_time).until(
       expected_conditions.new_window_is_opened(windows_before)
     )
       self.driver.switch_to.window(self.driver.window_handles[-1])
@@ -170,7 +174,7 @@ class BasePageScooter():
       return self.driver.window_handles
 
    #Метод прокрутки к элементу 
-   @allure.step("Прокручиваем траницу до элемента")
+   @allure.step("Прокручиваем страницу до элемента")
    def scroll_to_element(self, element):
       self.driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", element)
 

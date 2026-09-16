@@ -1,9 +1,5 @@
 import allure
 import pytest
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions
-from selenium.webdriver.support.wait import WebDriverWait
 from locators import OrderButtonLocators, BasePageLocators, LogoPageLocators
 from pages import OrderButtonScooter, BasePageScooter, LogoPageScooter
 from data import DATA_SET_1, DATA_SET_2, URLS
@@ -55,5 +51,5 @@ class TestOrder:
       logo.go_to_logo_yandex()
       logo.switch_to_new_window(windows_before)
 
-      logo.wait_url_page("dzen.ru")
+      logo.wait_url_contains("dzen.ru")
       assert "dzen.ru" in logo.get_current_url()
